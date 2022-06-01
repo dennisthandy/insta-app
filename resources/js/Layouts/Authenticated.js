@@ -9,7 +9,7 @@ export default function Authenticated({ auth, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="min-h-screen mx-auto bg-gray-100" style={{ width: 411 }}>
             <nav className="bg-white border-b border-gray-100">
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -19,15 +19,9 @@ export default function Authenticated({ auth, header, children }) {
                                     <span className='text-purple-600'>Insta</span>App
                                 </Link>
                             </div>
-
-                            {/* <div className="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div> */}
                         </div>
 
-                        <div className="hidden sm:flex sm:items-center sm:ml-6">
+                        <div className="hidden">
                             <div className="relative ml-3">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -63,7 +57,7 @@ export default function Authenticated({ auth, header, children }) {
                             </div>
                         </div>
 
-                        <div className="flex items-center -mr-2 sm:hidden">
+                        <div className="flex items-center -mr-2">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
                                 className="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500"
@@ -89,7 +83,7 @@ export default function Authenticated({ auth, header, children }) {
                     </div>
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
+                <div className={(showingNavigationDropdown ? 'block' : 'hidden')}>
                     {/* <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
