@@ -6,34 +6,45 @@ import Authenticated from "@/Layouts/Authenticated";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
 export default function Welcome(props) {
-    
     useEffect(() => {
         console.log(props);
-    }, [props])
+    }, [props]);
 
     return (
         <>
             <Head title="Welcome" />
-            <div className="relative flex justify-center min-h-screen bg-gray-100 items-top dark:bg-gray-900 sm:items-center sm:pt-0">
+            <div className="relative flex justify-center min-h-screen items-top dark:bg-gray-900 sm:items-center sm:pt-0">
                 {props.auth.user ? (
                     <Authenticated auth={props.auth} errors={props.errors}>
-                        <div className="grid w-full gap-4 p-4 pb-20 overflow-auto posts">
-                            {props.posts.map((post) => {
-                                const { id, title, caption, image, like, comments } =
-                                    post;
-                                return (
-                                    <PostCard
-                                        likes={like}
-                                        id={id}
-                                        title={title}
-                                        caption={caption}
-                                        image={image}
-                                        key={title}
-                                        comment={comments}
-                                    />
-                                );
-                            })}
-                        </div>
+                        {props.posts.length <= 0 ? (
+                            <div className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                <p className="text-center">No Post Yet. <br/>Tap camera icon below to create new post.</p>
+                            </div>
+                        ) : (
+                            <div className="grid w-full gap-4 p-4 pb-20 overflow-auto posts">
+                                {props.posts.map((post) => {
+                                    const {
+                                        id,
+                                        title,
+                                        caption,
+                                        image,
+                                        like,
+                                        comments,
+                                    } = post;
+                                    return (
+                                        <PostCard
+                                            likes={like}
+                                            id={id}
+                                            title={title}
+                                            caption={caption}
+                                            image={image}
+                                            key={title}
+                                            comment={comments}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
                         <BottomNavigation location="/" />
                     </Authenticated>
                 ) : (
@@ -63,6 +74,7 @@ export default function Welcome(props) {
                                     Register
                                 </Link>
                             </div>
+                            {/* <Link href={route("post.home")}>or Explore</Link> */}
                         </div>
                     </div>
                 )}
