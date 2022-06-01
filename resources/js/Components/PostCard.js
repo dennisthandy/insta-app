@@ -1,4 +1,5 @@
 import { useForm } from "@inertiajs/inertia-react";
+import axios from "axios";
 import React, { useState } from "react";
 
 export default function PostCard({
@@ -24,12 +25,12 @@ export default function PostCard({
 
     const handleLike = () => {
         setLike(like + 1);
-        likeForm.post(route("post.like"));
+        axios.post(route("post.like"), likeForm.data);
     };
 
     const handleComment = () => {
         setComments([...comments, commentForm.data.comment]);
-        commentForm.post(route("post.comment"));
+        axios.post(route("post.comment"), commentForm.data);
     };
 
     return (
@@ -48,7 +49,7 @@ export default function PostCard({
                 </div>
                 <div className="flex items-center space-x-2">
                     <div>
-                        {likes > 0 && (
+                        {like > 0 && (
                             <span className="mr-2 text-red-500">{like} </span>
                         )}
                         <button onClick={handleLike}>Like</button>

@@ -10,7 +10,7 @@ export default function Authenticated({ auth, header, children }) {
 
     return (
         <div className="min-h-screen mx-auto bg-gray-100" style={{ width: 411 }}>
-            <nav className="bg-white border-b border-gray-100">
+            <nav className="bg-blue-300 border-b border-gray-100">
                 <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
@@ -90,7 +90,7 @@ export default function Authenticated({ auth, header, children }) {
                         </ResponsiveNavLink>
                     </div> */}
 
-                    <div className="pt-4 pb-1 border-t border-gray-200">
+                    <div className="pt-4 pb-1 bg-white border-t border-gray-200">
                         <div className="px-4">
                             <div className="text-base font-medium text-gray-800">{auth.user.name}</div>
                             <div className="text-sm font-medium text-gray-500">{auth.user.email}</div>

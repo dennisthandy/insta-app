@@ -1,5 +1,6 @@
 import React from "react";
 import { BottomNavigation } from "@/Components/BottomNavigation";
+import Authenticated from "@/Layouts/Authenticated";
 import { Head, Link, useForm } from "@inertiajs/inertia-react";
 
 export default function CreatePost(props) {
@@ -28,9 +29,9 @@ export default function CreatePost(props) {
     };
 
     return (
-        <>
+        <Authenticated auth={props.auth} errors={props.errors}>
             <Head title="Post"/>
-            <div className="grid min-h-screen px-4 bg-gray-200 place-items-center">
+            <div className="grid mt-10 place-items-center">
                 <div className="space-y-4">
                     <h2 className="text-lg italic text-center">
                         Share Memorable Moment
@@ -115,6 +116,6 @@ export default function CreatePost(props) {
                 </div>
             </div>
             <BottomNavigation location={props.location}/>
-        </>
+        </Authenticated>
     );
 }
