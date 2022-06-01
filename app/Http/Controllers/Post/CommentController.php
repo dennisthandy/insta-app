@@ -13,23 +13,18 @@ class CommentController extends Controller
 
     public function store(Request $request)
     {
-        Comment::Create([
-            'post_id' => $request->postId,
-            'comment' => $request->comment,
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]);
-        // $row = DB::table('comment')->where('post_id', '=', $request->postId)->get()->toArray();
-        // $current_comment = $row[0]->comment;
+        try {
+            Comment::Create([
+                'post_id' => $request->postId,
+                'comment' => $request->comment,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
 
-        // $new_comment = $current_comment + 1;
-
-        // DB::table('comment')->where('post_id', '=', $request->postId)->update(['comment' => $new_comment]);
-
-        return inertia('/', [
-            'comment' => [
-                'success' => true
-            ],
-        ]);
+            return json_decode('{"success": true}');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return json_decode('{"success": false}');
+        }
     }
 }

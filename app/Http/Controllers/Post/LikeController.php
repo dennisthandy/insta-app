@@ -12,18 +12,19 @@ class LikeController extends Controller
     public function store(Request $request)
     {
     
-        $row = DB::table('like')->where('post_id', '=', $request->postId)->get()->toArray();
-        $current_like = $row[0]->like;
+        try {
+            //code...
+            $row = DB::table('like')->where('post_id', '=', $request->postId)->get()->toArray();
+            $current_like = $row[0]->like;
+    
+            $new_like = $current_like + 1;
+    
+            DB::table('like')->where('post_id', '=', $request->postId)->update(['like' => $new_like]);
 
-        $new_like = $current_like + 1;
-
-        DB::table('like')->where('post_id', '=', $request->postId)->update(['like' => $new_like]);
-
-        return inertia('/', [
-            'like' => [
-                'success' => true
-            ],
-        ]);
-;
+            return json_decode('{"success": true}');
+        } catch (\Throwable $th) {
+            //throw $th;
+            return json_decode('{"success": false}');
+        }
     }
 }
