@@ -2,10 +2,15 @@ import React, { useEffect } from "react";
 import { Link, Head } from "@inertiajs/inertia-react";
 import { BottomNavigation } from "@/Components/BottomNavigation";
 import PostCard from "@/Components/PostCard";
-import Authenticated from '@/Layouts/Authenticated';
+import Authenticated from "@/Layouts/Authenticated";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 
 export default function Welcome(props) {
+    
+    useEffect(() => {
+        console.log(props);
+    }, [props])
+
     return (
         <>
             <Head title="Welcome" />
@@ -14,13 +19,17 @@ export default function Welcome(props) {
                     <Authenticated auth={props.auth} errors={props.errors}>
                         <div className="grid w-full gap-4 p-4 pb-20 overflow-auto posts">
                             {props.posts.map((post) => {
-                                const { title, caption, image } = post;
+                                const { id, title, caption, image, like, comments } =
+                                    post;
                                 return (
                                     <PostCard
+                                        likes={like}
+                                        id={id}
                                         title={title}
                                         caption={caption}
                                         image={image}
                                         key={title}
+                                        comment={comments}
                                     />
                                 );
                             })}
@@ -30,7 +39,7 @@ export default function Welcome(props) {
                 ) : (
                     <div className="grid max-w-6xl min-h-screen px-4 mx-auto place-items-center sm:px-6 lg:px-8">
                         <div className="p-6 bg-white rounded-md">
-                            <ApplicationLogo/>
+                            <ApplicationLogo />
                             <h1 className="mb-2 text-xl font-bold">
                                 Welcome To{" "}
                                 <span className="text-purple-600">Insta</span>
